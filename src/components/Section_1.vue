@@ -9,7 +9,7 @@ let tl = gsap.timeline();
 onMounted(() => {
   gsap.to(".e", {
     rotateX: 540,
-    transformOrigin: "50% 60%",
+    transformOrigin: "50% 61%",
     duration: 2,
     repeat: -1,
     repeatDelay: 5,
@@ -34,7 +34,9 @@ onMounted(() => {
   <div class="h-screen border-2 border-amber-800 bg-light-blue relative">
     <!-- Title_1 -->
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <span class="text-7xl text-white font-black flex items-center">
+      <span
+        class="text-7xl text-white font-black flex items-center text-center align-text-top"
+      >
         <span class="e block">e</span>
         <span>.</span>
         <span>w</span>
