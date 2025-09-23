@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* 顏色 */
+@theme {
+  --color-light-blue: #c0d5f7;
+}
