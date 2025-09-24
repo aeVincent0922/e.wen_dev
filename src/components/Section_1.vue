@@ -8,8 +8,8 @@ let tl = gsap.timeline();
 
 onMounted(() => {
   gsap.to(".e", {
-    rotateX: 540,
-    transformOrigin: "50% 61%",
+    rotateY: 540,
+    transformOrigin: "50% 50%",
     duration: 2,
     repeat: -1,
     repeatDelay: 5,
