@@ -25,6 +25,8 @@ onMounted(() => {
 
 <template>
   <div id="smooth-wrapper" class="h-full">
+    <!-- 校準線 -->
+    <!-- <div class="vertical-line"></div> -->
     <div id="smooth-content">
       <Section_1 />
       <Section_2 />

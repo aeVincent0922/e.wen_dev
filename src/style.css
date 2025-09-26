@@ -4,3 +4,25 @@
 @theme {
   --color-light-blue: #adcafa;
 }
+
+.vertical-line {
+  position: fixed; /* 固定在視窗，不隨捲動移動 */
+  top: 0;
+  left: 50%; /* 水平中心 */
+  transform: translateX(-50%); /* 精準置中 */
+  width: 2px; /* 線的寬度 */
+  height: 100vh; /* 貫穿整個螢幕高度 */
+  background-color: red; /* 顏色可自訂 */
+  z-index: 999; /* 確保在上層 */
+}
+
+.horizontal-line {
+  position: fixed;
+  top: 25%; /* 高度一半 */
+  left: 0;
+  transform: translateY(-50%);
+  width: 100vw; /* 滿版寬度 */
+  height: 2px;
+  background-color: blue;
+  z-index: 999;
+}
