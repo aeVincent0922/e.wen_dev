@@ -6,7 +6,7 @@ import { onMounted } from "vue";
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 onMounted(() => {
-  const tl = gsap.timeline();
+  const tl_1 = gsap.timeline();
   // gsap.to(".e", {
   //   rotateY: 540,
   //   transformOrigin: "50% 50%",
@@ -39,7 +39,8 @@ onMounted(() => {
     autoSplit: true,
   });
 
-  tl.set(".first-title", { autoAlpha: 0, yPercent: 100 })
+  tl_1
+    .set(".first-title", { autoAlpha: 0, yPercent: 100 })
     .set(".vanishing-text", { autoAlpha: 0 })
     .to(".first-title", {
       duration: 1,
@@ -54,53 +55,56 @@ onMounted(() => {
       stagger: 0.6,
       ease: "power2.out",
       delay: 0.8,
-    })
-    .set(".e_1_comma", { display: "block", autoAlpha: 0 })
-    .to(".e_1_comma", { duration: 0.8, ease: "bounce.out", autoAlpha: 1 })
-    .to(".st_1", {
-      scrollTrigger: {
-        trigger: ".st_1",
-        start: "bottom 15%",
-        end: "bottom top",
-        scrub: true,
-      },
-      xPercent: -100,
-      duration: 2,
-      ease: "power2.in",
-    })
-    .to(".st_3", {
-      scrollTrigger: {
-        trigger: ".st_3",
-        start: "top 20%",
-        end: "top top",
-        scrub: true,
-      },
-      xPercent: -200,
-      duration: 3,
-      ease: "power2.in",
-    })
-    .to(".st_2", {
-      scrollTrigger: {
-        trigger: ".st_2",
-        start: "bottom 20%",
-        end: "bottom top",
-        scrub: true,
-      },
-      xPercent: 200,
-      duration: 2,
-      ease: "power2.in",
-    })
-    .to(".st_4", {
-      scrollTrigger: {
-        trigger: ".st_4",
-        start: "top 30%",
-        end: "top top",
-        scrub: true,
-      },
-      xPercent: 300,
-      duration: 5,
-      ease: "power2.in",
     });
+  // .set(".e_1_comma", { display: "block", autoAlpha: 0 })
+  // .to(".e_1_comma", { duration: 0.8, ease: "bounce.out", autoAlpha: 1 });
+
+  // scrollTrigger 的部分分開寫，避免汙染到timeline
+  gsap.to(".st_1", {
+    scrollTrigger: {
+      trigger: ".st_1",
+      start: "bottom 15%",
+      end: "bottom top",
+      scrub: true,
+      markers: true,
+    },
+    xPercent: -100,
+    duration: 2,
+    ease: "power2.in",
+  });
+  gsap.to(".st_3", {
+    scrollTrigger: {
+      trigger: ".st_3",
+      start: "top 20%",
+      end: "top top",
+      scrub: true,
+    },
+    xPercent: -200,
+    duration: 3,
+    ease: "power2.in",
+  });
+  gsap.to(".st_2", {
+    scrollTrigger: {
+      trigger: ".st_2",
+      start: "bottom 20%",
+      end: "bottom top",
+      scrub: true,
+    },
+    xPercent: 200,
+    duration: 2,
+    ease: "power2.in",
+  });
+  gsap.to(".st_4", {
+    scrollTrigger: {
+      trigger: ".st_4",
+      start: "top 30%",
+      end: "top top",
+      scrub: true,
+    },
+    xPercent: 300,
+    duration: 5,
+    ease: "power2.in",
+  });
 });
 </script>
 <template>
@@ -113,7 +117,7 @@ onMounted(() => {
     >
       <div class="w-fit split-title flex st_1">
         <div class="first-title">e</div>
-        <div class="e_1_comma hidden">.</div>
+        <!-- <div class="e_1_comma hidden">.</div> -->
         <div class="vanishing-text">very</div>
       </div>
       <div class="w-fit split-title flex st_2">
