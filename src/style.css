@@ -5,6 +5,11 @@
   --color-light-blue: #adcafa;
 }
 
+body {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+}
+
 .vertical-line {
   position: fixed; /* 固定在視窗，不隨捲動移動 */
   top: 0;
