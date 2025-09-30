@@ -7,37 +7,16 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 onMounted(() => {
   const tl_1 = gsap.timeline();
-  // gsap.to(".e", {
-  //   rotateY: 540,
-  //   transformOrigin: "50% 50%",
-  //   duration: 2,
-  //   repeat: -1,
-  //   repeatDelay: 3,
-  //   yoyo: true,
-  //   ease: "power2.inOut",
+  // const st_1 = SplitText.create(".split-title", {
+  //   type: "chars, words",
+  //   mask: "words",
+  //   autoSplit: true,
   // });
-  // gsap.to(".test-square", {
-  //   scrollTrigger: {
-  //     trigger: ".test-square",
-  //     start: "top 50%",
-  //     end: "top 20%",
-  //     markers: false,
-  //     scrub: true,
-  //   },
-  //   x: +300,
-  //   rotate: 1080,
-  //   duration: 2,
+  // const st_2 = SplitText.create(".vanishing-text", {
+  //   type: "chars, words",
+  //   mask: "chars",
+  //   autoSplit: true,
   // });
-  const st_1 = SplitText.create(".split-title", {
-    type: "chars, words",
-    mask: "words",
-    autoSplit: true,
-  });
-  const st_2 = SplitText.create(".vanishing-text", {
-    type: "chars, words",
-    mask: "chars",
-    autoSplit: true,
-  });
 
   tl_1
     .set(".first-title", { autoAlpha: 0, yPercent: 100 })
@@ -49,15 +28,16 @@ onMounted(() => {
       stagger: 0.1,
       ease: "power2.out",
     })
-    .to(".vanishing-text", {
-      duration: 1,
-      autoAlpha: 1,
-      stagger: 0.6,
-      ease: "power2.out",
-      delay: 0.8,
-    });
-  // .set(".e_1_comma", { display: "block", autoAlpha: 0 })
-  // .to(".e_1_comma", { duration: 0.8, ease: "bounce.out", autoAlpha: 1 });
+    .to(
+      ".vanishing-text",
+      {
+        duration: 1,
+        autoAlpha: 1,
+        stagger: 0.6,
+        ease: "power2.out",
+      },
+      "+=0.8"
+    );
 
   // scrollTrigger 的部分分開寫，避免汙染到timeline
   gsap.to(".st_1", {
@@ -66,7 +46,6 @@ onMounted(() => {
       start: "bottom 15%",
       end: "bottom top",
       scrub: true,
-      markers: true,
     },
     xPercent: -100,
     duration: 2,
