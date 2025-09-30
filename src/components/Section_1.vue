@@ -19,25 +19,44 @@ onMounted(() => {
   // });
 
   tl_1
-    .set(".first-title", { autoAlpha: 0, yPercent: 100 })
+    .set(".first-title", { autoAlpha: 0, yPercent: -100 })
     .set(".vanishing-text", { autoAlpha: 0 })
+    .set(".rotation-icon-1", { autoAlpha: 0 })
+    .set(".rotation-icon-2", { autoAlpha: 0 })
     .to(".first-title", {
       duration: 1,
       yPercent: 0,
       autoAlpha: 1,
-      stagger: 0.1,
+      stagger: 0.2,
       ease: "power2.out",
     })
     .to(
       ".vanishing-text",
       {
-        duration: 1,
+        duration: 0.5,
         autoAlpha: 1,
-        stagger: 0.6,
+        stagger: 0.5,
         ease: "power2.out",
       },
-      "+=0.8"
-    );
+      "+=0.3"
+    )
+    .to(".rotation-icon-1", { autoAlpha: 1, duration: 0.5 })
+    .to(".rotation-icon-1", {
+      rotation: +90,
+      duration: 0.5,
+      repeatDelay: 0.8,
+      repeat: -1,
+      ease: "power2.out",
+    })
+    .to(".rotation-icon-2", { autoAlpha: 1, duration: 0.5 })
+    .to(".rotation-icon-2", {
+      rotation: 15,
+      duration: 2,
+      ease: "sine.inOut", // 平滑往返
+      repeat: -1,
+      yoyo: true,
+      transformOrigin: "50% 100%", // 底部中心作為支點
+    });
 
   // scrollTrigger 的部分分開寫，避免汙染到timeline
   gsap.to(".st_1", {
@@ -84,6 +103,35 @@ onMounted(() => {
     duration: 5,
     ease: "power2.in",
   });
+  gsap.to(".rotation-icon-1", {
+    scrollTrigger: {
+      trigger: ".st_2",
+      start: "bottom 20%",
+      end: "bottom top",
+      scrub: true,
+    },
+    scale: 3,
+    rotate: 1080,
+    autoAlpha: 0,
+    duration: 3,
+    yPercent: 500,
+    ease: "power2.out",
+  });
+  gsap.to(".rotation-icon-2", {
+    scrollTrigger: {
+      trigger: ".st_4",
+      start: "top 30%",
+      end: "top top",
+      scrub: true,
+    },
+    autoAlpha: 0,
+    rotation: 720,
+    duration: 3,
+    xPercent: 100,
+    yPercent: 100,
+    ease: "power2.out",
+    scale: 1.5,
+  });
 });
 </script>
 <template>
@@ -92,24 +140,82 @@ onMounted(() => {
     <!-- <div class="horizontal-line"></div> -->
     <!-- 首頁標題動畫 -->
     <div
-      class="container absolute text-6xl leading-20 top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white font-black flex flex-col item-center pl-5"
+      class="container text-6xl leading-20 pt-15 text-white font-black flex flex-col item-center pl-5"
     >
       <div class="w-fit split-title flex st_1">
-        <div class="first-title">e</div>
-        <!-- <div class="e_1_comma hidden">.</div> -->
+        <div class="first-title e_1">e</div>
         <div class="vanishing-text">very</div>
+        <img
+          src="../assets/images/icons/flower_icon.png"
+          class="w-[40px] h-[40px] rotation-icon-1"
+        />
       </div>
       <div class="w-fit split-title flex st_2">
-        <div class="first-title">w</div>
+        <div class="first-title w">w</div>
         <div class="vanishing-text">aning</div>
       </div>
       <div class="w-fit split-title flex st_3">
-        <div class="first-title">e</div>
+        <div class="first-title e_2">e</div>
         <div class="vanishing-text">ffort</div>
       </div>
-      <div class="w-fit split-title flex st_4">
-        <div class="first-title">n</div>
+      <div class="w-fit split-title flex st_4 relative">
+        <div class="first-title n">n</div>
         <div class="vanishing-text">udges</div>
+        <img
+          src="../assets/images/icons/tree_icon.png"
+          class="w-[80px] h-[80px] rotation-icon-2 absolute -right-11 bottom-2 -z-10"
+        />
+      </div>
+    </div>
+    <!-- 副標 -->
+    <div class="flex items-center justify-around h-fit pt-15 text-white">
+      <!-- 左括號 -->
+      <div
+        class="w-5 h-fit"
+        style="
+          translate: none;
+          rotate: none;
+          scale: none;
+          transform: translate(0px, 0px);
+          opacity: 1;
+        "
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 27 78"
+          aria-hidden="true"
+        >
+          <path
+            fill="#FFFCE1"
+            d="M26.52 77.21h-5.75c-6.83 0-12.38-5.56-12.38-12.38V48.38C8.39 43.76 4.63 40 .01 40v-4c4.62 0 8.38-3.76 8.38-8.38V12.4C8.38 5.56 13.94 0 20.77 0h5.75v4h-5.75c-4.62 0-8.38 3.76-8.38 8.38V27.6c0 4.34-2.25 8.17-5.64 10.38 3.39 2.21 5.64 6.04 5.64 10.38v16.45c0 4.62 3.76 8.38 8.38 8.38h5.75v4.02Z"
+          ></path>
+        </svg>
+      </div>
+      <!-- 文字內容 -->
+      <h3>測試文字.....</h3>
+      <!-- 右括號 -->
+      <div
+        class="h-fit w-5"
+        style="
+          translate: none;
+          rotate: none;
+          scale: none;
+          transform: rotate(180deg) skew(360deg, 0deg);
+          opacity: 1;
+        "
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 27 78"
+          aria-hidden="true"
+        >
+          <path
+            fill="#FFFCE1"
+            d="M26.52 77.21h-5.75c-6.83 0-12.38-5.56-12.38-12.38V48.38C8.39 43.76 4.63 40 .01 40v-4c4.62 0 8.38-3.76 8.38-8.38V12.4C8.38 5.56 13.94 0 20.77 0h5.75v4h-5.75c-4.62 0-8.38 3.76-8.38 8.38V27.6c0 4.34-2.25 8.17-5.64 10.38 3.39 2.21 5.64 6.04 5.64 10.38v16.45c0 4.62 3.76 8.38 8.38 8.38h5.75v4.02Z"
+          ></path>
+        </svg>
       </div>
     </div>
   </div>
