@@ -50,13 +50,6 @@ onMounted(() => {
       opacity: 0,
       ease: "power2.out",
     })
-    .to(".e_1", { duration: 0.1, yPercent: 300 })
-    .to(".w", { duration: 0.1, yPercent: 200 })
-    .to(".e_2", { duration: 0.1, yPercent: 100 })
-    .to(".n", { duration: 0.2, xPercent: 66, ease: "power2.out" })
-    .to(".e_2", { duration: 0.2, xPercent: 68, ease: "power2.out" })
-    .to(".w", { duration: 0.2, xPercent: 30, ease: "power2.out" })
-    .to(".e_1", { duration: 1, xPercent: 10, ease: "bounce.out" })
     .set(".e_1_comma", { display: "block" })
     .to(".e_1_comma", { duration: 0.8, ease: "bounce.out", opacity: 1 });
 });
