@@ -23,6 +23,7 @@ onMounted(() => {
     .set(".vanishing-text", { autoAlpha: 0 })
     .set(".rotation-icon-1", { autoAlpha: 0 })
     .set(".rotation-icon-2", { autoAlpha: 0 })
+    .set(".arrow_container", { autoAlpha: 0 })
     .to(".first-title", {
       duration: 1,
       yPercent: 0,
@@ -41,14 +42,18 @@ onMounted(() => {
       "+=0.3"
     )
     .to(".rotation-icon-1", { autoAlpha: 1, duration: 0.5 })
-    .to(".rotation-icon-1", {
-      rotation: +90,
-      duration: 0.5,
-      repeatDelay: 0.8,
-      repeat: -1,
-      ease: "power2.out",
-    })
-    .to(".rotation-icon-2", { autoAlpha: 1, duration: 0.5 })
+    .to(
+      ".rotation-icon-1",
+      {
+        rotation: +90,
+        duration: 0.5,
+        repeatDelay: 0.8,
+        repeat: -1,
+        ease: "power2.out",
+      },
+      "<"
+    )
+    .to(".rotation-icon-2", { autoAlpha: 1, duration: 0.5 }, "<")
     .to(".rotation-icon-2", {
       rotation: 15,
       duration: 2,
@@ -56,6 +61,21 @@ onMounted(() => {
       repeat: -1,
       yoyo: true,
       transformOrigin: "50% 100%", // 底部中心作為支點
+    })
+    .to(
+      ".arrow_container",
+      {
+        autoAlpha: 1,
+        duration: 0.3,
+      },
+      "<"
+    )
+    .to(".arrow_down", {
+      yPercent: 20,
+      repeat: -1,
+      duration: 1.3,
+      yoyo: true,
+      ease: "power2.inOut",
     });
 
   // scrollTrigger 的部分分開寫，避免汙染到timeline
@@ -126,11 +146,22 @@ onMounted(() => {
     },
     autoAlpha: 0,
     rotation: 720,
-    duration: 3,
+    duration: 5,
     xPercent: 100,
-    yPercent: 100,
+    yPercent: -100,
     ease: "power2.out",
     scale: 1.5,
+  });
+  const angles = [0, 5, 10, 15]; // 每張紙的旋轉角度
+  gsap.to(".stacked-note", {
+    rotation: (i) => angles[i], // index 對應旋轉角度
+    transformOrigin: "left bottom", // 左下角作為旋轉中心
+    duration: 0.8,
+    stagger: 0.1, // 依序旋轉，造成展開感
+    ease: "power2.out",
+    repeat: -1,
+    repeatDelay: 1,
+    yoyo: true,
   });
 });
 </script>
@@ -167,55 +198,34 @@ onMounted(() => {
         />
       </div>
     </div>
-    <!-- 副標 -->
-    <div class="flex items-center justify-around h-fit pt-15 text-white">
-      <!-- 左括號 -->
+    <!-- scroll down -->
+    <div
+      class="absolute bottom-0 flex w-full text-white text-2xl justify-center items-center flex-col arrow_container"
+    >
+      <span>scroll down</span>
+      <span class="rotate-90 arrow_down">》</span>
+    </div>
+    <!-- scroll 顯示 -->
+    <div class="reveal-container">
       <div
-        class="w-5 h-fit"
-        style="
-          translate: none;
-          rotate: none;
-          scale: none;
-          transform: translate(0px, 0px);
-          opacity: 1;
-        "
+        class="stacked-note rounded-2xl w-80 h-80 absolute -bottom-15 left-0 bg-amber-600 z-40 flex items-center justify-center text-white text-2xl"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 27 78"
-          aria-hidden="true"
-        >
-          <path
-            fill="#FFFCE1"
-            d="M26.52 77.21h-5.75c-6.83 0-12.38-5.56-12.38-12.38V48.38C8.39 43.76 4.63 40 .01 40v-4c4.62 0 8.38-3.76 8.38-8.38V12.4C8.38 5.56 13.94 0 20.77 0h5.75v4h-5.75c-4.62 0-8.38 3.76-8.38 8.38V27.6c0 4.34-2.25 8.17-5.64 10.38 3.39 2.21 5.64 6.04 5.64 10.38v16.45c0 4.62 3.76 8.38 8.38 8.38h5.75v4.02Z"
-          ></path>
-        </svg>
+        1
       </div>
-      <!-- 文字內容 -->
-      <h3>測試文字.....</h3>
-      <!-- 右括號 -->
       <div
-        class="h-fit w-5"
-        style="
-          translate: none;
-          rotate: none;
-          scale: none;
-          transform: rotate(180deg) skew(360deg, 0deg);
-          opacity: 1;
-        "
+        class="stacked-note rounded-2xl w-80 h-80 absolute -bottom-15 left-0 bg-green-800 z-30 flex items-center justify-center text-white text-2xl"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 27 78"
-          aria-hidden="true"
-        >
-          <path
-            fill="#FFFCE1"
-            d="M26.52 77.21h-5.75c-6.83 0-12.38-5.56-12.38-12.38V48.38C8.39 43.76 4.63 40 .01 40v-4c4.62 0 8.38-3.76 8.38-8.38V12.4C8.38 5.56 13.94 0 20.77 0h5.75v4h-5.75c-4.62 0-8.38 3.76-8.38 8.38V27.6c0 4.34-2.25 8.17-5.64 10.38 3.39 2.21 5.64 6.04 5.64 10.38v16.45c0 4.62 3.76 8.38 8.38 8.38h5.75v4.02Z"
-          ></path>
-        </svg>
+        2
+      </div>
+      <div
+        class="stacked-note rounded-2xl w-80 h-80 absolute -bottom-15 left-0 bg-indigo-700 z-20 flex items-center justify-center text-white text-2xl"
+      >
+        3
+      </div>
+      <div
+        class="stacked-note rounded-2xl w-80 h-80 absolute -bottom-15 left-0 bg-sky-800 z-10 flex items-center justify-center text-white text-2xl"
+      >
+        4
       </div>
     </div>
   </div>
