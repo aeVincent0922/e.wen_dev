@@ -152,21 +152,21 @@ onMounted(() => {
     ease: "power2.out",
     scale: 1.5,
   });
-  const angles = [0, 5, 10, 15]; // 每張紙的旋轉角度
   gsap.to(".stacked-note", {
-    rotation: (i) => angles[i], // index 對應旋轉角度
-    transformOrigin: "left bottom", // 左下角作為旋轉中心
-    duration: 0.8,
-    stagger: 0.1, // 依序旋轉，造成展開感
-    ease: "power2.out",
-    repeat: -1,
-    repeatDelay: 1,
-    yoyo: true,
+    scrollTrigger: {
+      trigger: ".stacked-note",
+      start: "top bottom",
+      end: "top 70%",
+      scrub: true,
+    },
+    height: 400,
+    width: 400,
+    scale: 4,
   });
 });
 </script>
 <template>
-  <div class="h-screen border-2 border-amber-800 bg-light-blue relative">
+  <div class="h-screen bg-light-blue relative">
     <!-- 校準線 -->
     <!-- <div class="horizontal-line"></div> -->
     <!-- 首頁標題動畫 -->
@@ -200,7 +200,7 @@ onMounted(() => {
     </div>
     <!-- scroll down -->
     <div
-      class="absolute bottom-0 flex w-full text-white text-2xl justify-center items-center flex-col arrow_container"
+      class="absolute bottom-50 flex w-full text-white text-2xl justify-center items-center flex-col arrow_container"
     >
       <span>scroll down</span>
       <span class="rotate-90 arrow_down">》</span>
@@ -208,24 +208,9 @@ onMounted(() => {
     <!-- scroll 顯示 -->
     <div class="reveal-container">
       <div
-        class="stacked-note rounded-2xl w-80 h-80 absolute -bottom-15 left-0 bg-amber-600 z-40 flex items-center justify-center text-white text-2xl"
+        class="stacked-note rounded-full w-1 h-1 absolute -bottom-1 -translate-x-1/2 left-1/2 bg-amber-600 z-40 flex items-center justify-center text-white text-2xl"
       >
-        1
-      </div>
-      <div
-        class="stacked-note rounded-2xl w-80 h-80 absolute -bottom-15 left-0 bg-green-800 z-30 flex items-center justify-center text-white text-2xl"
-      >
-        2
-      </div>
-      <div
-        class="stacked-note rounded-2xl w-80 h-80 absolute -bottom-15 left-0 bg-indigo-700 z-20 flex items-center justify-center text-white text-2xl"
-      >
-        3
-      </div>
-      <div
-        class="stacked-note rounded-2xl w-80 h-80 absolute -bottom-15 left-0 bg-sky-800 z-10 flex items-center justify-center text-white text-2xl"
-      >
-        4
+        
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <script setup lang="ts"></script>
 <template>
-  <div class="h-screen border-2 border-amber-500">
-    <p>測試</p>
+  <div class="h-screen  bg-light-blue ">
+    <!-- <p>測試</p> -->
   </div>
 </template>
