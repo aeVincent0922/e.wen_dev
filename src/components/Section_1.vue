@@ -86,40 +86,40 @@ onMounted(() => {
       end: "bottom top",
       scrub: true,
     },
-    xPercent: -100,
+    xPercent: -200,
     duration: 2,
     ease: "power2.in",
   });
   gsap.to(".st_3", {
     scrollTrigger: {
       trigger: ".st_3",
-      start: "top 20%",
+      start: "top 30%",
       end: "top top",
       scrub: true,
     },
-    xPercent: -200,
+    xPercent: -300,
     duration: 3,
     ease: "power2.in",
   });
   gsap.to(".st_2", {
     scrollTrigger: {
       trigger: ".st_2",
-      start: "bottom 20%",
+      start: "bottom 30%",
       end: "bottom top",
       scrub: true,
     },
-    xPercent: 200,
+    xPercent: 300,
     duration: 2,
     ease: "power2.in",
   });
   gsap.to(".st_4", {
     scrollTrigger: {
       trigger: ".st_4",
-      start: "top 30%",
+      start: "top 40%",
       end: "top top",
       scrub: true,
     },
-    xPercent: 300,
+    xPercent: 400,
     duration: 5,
     ease: "power2.in",
   });
@@ -161,7 +161,7 @@ onMounted(() => {
     },
     height: 400,
     width: 400,
-    scale: 4,
+    scale: 3,
   });
 });
 </script>
@@ -200,7 +200,7 @@ onMounted(() => {
     </div>
     <!-- scroll down -->
     <div
-      class="absolute bottom-50 flex w-full text-white text-2xl justify-center items-center flex-col arrow_container"
+      class="absolute bottom-40 flex w-full text-white text-2xl justify-center items-center flex-col arrow_container"
     >
       <span>scroll down</span>
       <span class="rotate-90 arrow_down">》</span>
@@ -208,10 +208,8 @@ onMounted(() => {
     <!-- scroll 顯示 -->
     <div class="reveal-container">
       <div
-        class="stacked-note rounded-full w-1 h-1 absolute -bottom-1 -translate-x-1/2 left-1/2 bg-amber-600 z-40 flex items-center justify-center text-white text-2xl"
-      >
-        
-      </div>
+        class="stacked-note rounded-full w-1 h-1 absolute -bottom-2 -translate-x-1/2 left-1/2 bg-amber-600 z-40 flex items-center justify-center text-white text-2xl"
+      ></div>
     </div>
   </div>
 </template>
