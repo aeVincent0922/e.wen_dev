@@ -23,7 +23,8 @@ onMounted(() => {
     .set(".vanishing-text", { autoAlpha: 0 })
     .set(".rotation-icon-1", { autoAlpha: 0 })
     .set(".rotation-icon-2", { autoAlpha: 0 })
-    .set(".arrow_container", { autoAlpha: 0 })
+    .set(".scroll_down_arrow", { autoAlpha: 0 })
+    .set(".heading_2", { autoAlpha: 0 })
     .to(".first-title", {
       duration: 1,
       yPercent: 0,
@@ -62,8 +63,13 @@ onMounted(() => {
       yoyo: true,
       transformOrigin: "50% 100%", // 底部中心作為支點
     })
+    .to(".heading_2", {
+      autoAlpha: 1,
+      duration: 1,
+      ease: "power2.in",
+    })
     .to(
-      ".arrow_container",
+      ".scroll_down_arrow",
       {
         autoAlpha: 1,
         duration: 0.3,
@@ -152,16 +158,25 @@ onMounted(() => {
     ease: "power2.out",
     scale: 1.5,
   });
-  gsap.to(".stacked-note", {
+  gsap.to(".scroll_down_arrow", {
     scrollTrigger: {
-      trigger: ".stacked-note",
-      start: "top bottom",
-      end: "top 70%",
+      trigger: ".scroll_down_arrow",
+      start: "top 80%",
+      end: "top 60%",
       scrub: true,
     },
-    height: 400,
-    width: 400,
-    scale: 3,
+    autoAlpha: 0,
+    yPercent: 400,
+  });
+  gsap.to(".heading_2", {
+    scrollTrigger: {
+      trigger: ".scroll_down_arrow",
+      start: "top 80%",
+      end: "top 60%",
+      scrub: true,
+    },
+    autoAlpha: 0,
+    xPercent: 200,
   });
 });
 </script>
@@ -169,7 +184,7 @@ onMounted(() => {
   <div class="h-screen bg-light-blue relative">
     <!-- 校準線 -->
     <!-- <div class="horizontal-line"></div> -->
-    <!-- 首頁標題動畫 -->
+    <!-- Heading_1 動畫 -->
     <div
       class="container text-6xl leading-20 pt-15 text-white font-black flex flex-col item-center pl-5"
     >
@@ -198,18 +213,20 @@ onMounted(() => {
         />
       </div>
     </div>
+    <!-- Heading_2 -->
+    <div
+      class="absolute bottom-40 w-full flex text-white justify-center heading_2"
+    >
+      <div class="flex flex-col relative w-full">
+        <span class="absolute translate-x-1/2 left-1/2">只是一些小小的、想說的話</span>
+      </div>
+    </div>
     <!-- scroll down -->
     <div
-      class="absolute bottom-40 flex w-full text-white text-2xl justify-center items-center flex-col arrow_container"
+      class="absolute bottom-10 flex w-full text-white text-2xl justify-center items-center flex-col scroll_down_arrow"
     >
       <span>scroll down</span>
       <span class="rotate-90 arrow_down">》</span>
-    </div>
-    <!-- scroll 顯示 -->
-    <div class="reveal-container">
-      <div
-        class="stacked-note rounded-full w-1 h-1 absolute -bottom-2 -translate-x-1/2 left-1/2 bg-amber-600 z-40 flex items-center justify-center text-white text-2xl"
-      ></div>
     </div>
   </div>
 </template>
